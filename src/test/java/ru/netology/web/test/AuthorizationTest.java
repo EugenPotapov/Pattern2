@@ -24,12 +24,12 @@ class AuthorizationTest {
     @Test
     @DisplayName("Should successfully login with active registered user")
     void shouldSuccessfulLoginIfRegisteredActiveUser() {
-        var notRegisteredUser = getUser("active");
-        $("[data-test-id='login'] input").setValue(notRegisteredUser.getLogin());
-        $("[data-test-id='password'] input").setValue(notRegisteredUser.getPassword());
+        var RegisteredUser = getRegisteredUser("active");
+        $("[data-test-id='login'] input").setValue(RegisteredUser.getLogin());
+        $("[data-test-id='password'] input").setValue(RegisteredUser.getPassword());
         $("button.button").click();
-        $("[data-test-id=error-notification] .notification__content")
-                .shouldHave(Condition.exactText("Ошибка! " + "Неверно указан логин или пароль"), Duration.ofSeconds(13))
+        $("h2")
+                .shouldHave(Condition.exactText("Личный кабинет"), Duration.ofSeconds(10))
                 .shouldBe(Condition.visible);
 
     }
